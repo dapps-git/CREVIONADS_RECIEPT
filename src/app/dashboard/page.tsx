@@ -147,7 +147,7 @@ export default function ReceiptMaker() {
         const loggedIn = localStorage.getItem("isLoggedIn");
 
         if (loggedIn !== "true") {
-            router.push("/login");
+            router.push("/dashboard");
         }
     }, [router]);
     const handleGeneratePDF = async () => {
