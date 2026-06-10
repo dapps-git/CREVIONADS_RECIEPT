@@ -1,0 +1,708 @@
+:root {
+  --brand-purple: #3A025B;
+  --brand-purple-light: #ede5f5;
+  --brand-purple-hover: #2a0143;
+  --brand-yellow: #f4be1a;
+  --brand-yellow-light: #fef8e8;
+  
+  --bg-sidebar: #180824;
+  --bg-sidebar-card: #220a38;
+  --bg-canvas: #f2f1f7;
+  --bg-paper: #ffffff;
+  
+  --text-dark: #1f1b2d;
+  --text-muted: #6a647d;
+  --text-light: #ffffff;
+  --text-light-muted: #a49fc1;
+  
+  --border-color: #e2dfed;
+  --border-focus: #7c4dff;
+  --border-sidebar: #4a1468;
+  
+  --font-outfit: var(--font-outfit), sans-serif;
+  --font-inter: var(--font-inter), sans-serif;
+  
+  --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  /* Ensure backgrounds and colors always print in PDF/print */
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  color-adjust: exact;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-outfit);
+  background-color: var(--bg-canvas);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Mobile: allow full page scroll */
+@media (max-width: 900px) {
+  html, body {
+    overflow: auto;
+    height: auto;
+  }
+}
+
+/* App Layout */
+.app-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Left Sidebar / Form panel */
+.sidebar {
+  width: 440px;
+  min-width: 440px;
+  height: 100%;
+  background-color: var(--bg-sidebar);
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-sidebar);
+  overflow-y: auto;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--border-sidebar);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-header h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, var(--brand-yellow), #ffe082);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sidebar-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.form-section {
+  background-color: var(--bg-sidebar-card);
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border-sidebar);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.section-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--brand-yellow);
+  margin-bottom: 4px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group.row {
+  flex-direction: row;
+  gap: 12px;
+}
+
+.form-group.row > * {
+  flex: 1;
+}
+
+.form-group label {
+  font-family: var(--font-inter);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-light-muted);
+}
+
+.form-group input, 
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-sidebar);
+  background-color: rgba(0, 0, 0, 0.2);
+  color: var(--text-light);
+  font-family: var(--font-inter);
+  font-size: 0.9rem;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+  border-color: var(--border-focus);
+  background-color: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.2);
+}
+
+.fee-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.fee-row .desc-col {
+  flex: 3;
+}
+
+.fee-row .amount-col {
+  flex: 2;
+}
+
+.sidebar-actions {
+  padding: 24px;
+  border-top: 1px solid var(--border-sidebar);
+  background-color: var(--bg-sidebar);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: sticky;
+  bottom: 0;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition-smooth);
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--brand-purple);
+  color: var(--text-light);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary:hover {
+  background-color: var(--brand-purple-hover);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: var(--brand-yellow);
+  color: var(--bg-sidebar);
+}
+
+.btn-secondary:hover {
+  background-color: #e2b012;
+  transform: translateY(-1px);
+}
+
+/* Right Canvas Panel */
+.canvas {
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+}
+
+/* Receipt Paper container */
+.receipt-wrapper {
+  background-color: var(--bg-paper);
+  width: 800px;
+  min-width: 800px;
+  height: 566px; /* Aspect ratio matches the image landscape receipt */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 40px 45px 40px; /* Space for the bottom footer banner */
+}
+
+/* Top Header */
+.receipt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  border-bottom: 2px solid var(--brand-purple);
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  position: relative;
+  min-height: 90px;
+}
+
+.header-logo-container {
+  display: flex;
+  align-items: center;
+  max-width: 280px;
+  min-width: 220px;
+}
+
+.header-logo {
+  height: 82px;
+  width: auto;
+  object-fit: contain;
+}
+
+.header-contact {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-right: 230px; /* Increased space so diagonal never clips the address text */
+  flex: 1;
+}
+
+.contact-divider {
+  width: 1.5px;
+  background-color: var(--brand-purple);
+  align-self: stretch;
+  margin: 4px 0;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--font-inter);
+  font-size: 0.74rem;
+  color: var(--text-dark);
+  font-weight: 500;
+  white-space: nowrap; /* Prevent address text wrapping into diagonal area */
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contact-item svg {
+  color: var(--brand-purple);
+  width: 12px;
+  height: 12px;
+}
+
+/* Diagonal Graphic */
+.diagonal-container {
+  position: absolute;
+  top: -28px; /* Offset parent padding */
+  right: -40px; /* Offset parent padding */
+  width: 280px;
+  height: 130px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.diagonal-yellow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 56px; /* 20% of 280px */
+  height: 100%;
+  background-color: var(--brand-yellow);
+  transform: skewX(-32.8deg);
+  transform-origin: bottom left;
+}
+
+.diagonal-purple {
+  position: absolute;
+  top: 0;
+  left: 55px; /* Overlap by 1px to avoid any sub-pixel gap */
+  width: 300px; /* Extends past container bounds */
+  height: 100%;
+  background-color: var(--brand-purple);
+  transform: skewX(-32.8deg);
+  transform-origin: bottom left;
+}
+
+/* Main Content Body */
+.receipt-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  flex: 1;
+}
+
+/* Title Section */
+.receipt-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.receipt-title {
+  color: var(--brand-purple);
+  font-size: 1.3rem; /* Reduced size */
+  font-weight: 850;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-bottom: 2.5px solid var(--brand-purple);
+  padding-bottom: 4px;
+  width: fit-content;
+}
+
+/* Receipt Details (No/Date) */
+.receipt-meta-box {
+  display: grid;
+  grid-template-columns: 75px 85px; /* Reduced width */
+  border: 1.5px solid var(--brand-purple);
+  border-radius: 6px;
+  overflow: hidden;
+  font-family: var(--font-inter);
+}
+
+.meta-row {
+  display: contents;
+}
+
+.meta-label {
+  background-color: var(--brand-purple);
+  color: var(--text-light);
+  padding: 4px 8px; /* Reduced padding */
+  font-size: 0.68rem; /* Compact size */
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.meta-value {
+  padding: 4px 8px; /* Reduced padding */
+  font-size: 0.72rem; /* Compact size */
+  font-weight: 700;
+  color: var(--text-dark);
+  background-color: var(--bg-paper);
+  display: flex;
+  align-items: center;
+  border-left: 1.5px solid var(--brand-purple);
+}
+
+.meta-row:not(:last-child) .meta-label,
+.meta-row:not(:last-child) .meta-value {
+  border-bottom: 1.5px solid var(--brand-purple);
+}
+
+/* Grid layout for fields and table */
+.receipt-details-section {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  align-items: start;
+  width: 100%;
+}
+
+/* Info fields (Student Name, Course, Phone, Payment For) */
+.info-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+}
+
+.info-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background-color: var(--brand-purple);
+  border-radius: 50%;
+  color: var(--text-light);
+}
+
+.info-icon-wrapper svg {
+  width: 11px;
+  height: 11px;
+}
+
+.info-label {
+  font-weight: 700;
+  color: var(--text-dark);
+  min-width: 125px;
+  display: inline-block;
+}
+
+.info-value {
+  flex: 1;
+  color: var(--text-dark);
+  font-weight: 500;
+  padding: 3px 0;
+  border-bottom: 1px dashed #c0bccc; /* clean look for screen, can disable or change */
+  font-family: var(--font-inter);
+}
+
+.pdf-mode .info-value {
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+/* Financial Table */
+.financial-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--brand-purple);
+  border-radius: 6px;
+  overflow: hidden;
+  font-family: var(--font-inter);
+  margin: 0;
+}
+
+.financial-table th,
+.financial-table td {
+  border: 1px solid var(--brand-purple); /* Thin grid lines close every row & column */
+  padding: 8px 12px;
+}
+
+.financial-table th {
+  background-color: var(--bg-paper);
+  color: var(--brand-purple);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.financial-table th:last-child {
+  text-align: right;
+}
+
+.financial-table td {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.financial-table td:last-child {
+  text-align: right;
+  font-weight: 600;
+}
+
+.financial-table tr.total-row td {
+  background-color: var(--bg-paper);
+  color: var(--brand-purple);
+  font-weight: 800;
+  font-size: 0.82rem;
+  padding: 9px 12px;
+}
+
+/* Bottom gray card section for payment details */
+.payment-summary-box {
+  background-color: var(--brand-purple-light);
+  border-radius: 8px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--font-inter);
+}
+
+.summary-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+}
+
+.summary-icon-wrapper {
+  color: var(--brand-purple);
+  display: flex;
+  align-items: center;
+}
+
+.summary-icon-wrapper svg {
+  width: 14px;
+  height: 14px;
+}
+
+.summary-label {
+  font-weight: 700;
+  color: var(--brand-purple);
+  min-width: 120px;
+}
+
+.summary-value {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* Footer Section */
+.receipt-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: auto;
+}
+
+.signature-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.signature-line {
+  width: 180px;
+  border-top: 1.5px solid var(--brand-purple);
+  margin-bottom: 6px;
+}
+
+.signature-text {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* Bottom Banners */
+.footer-banner-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  z-index: 5;
+}
+
+.banner-purple {
+  height: 14px;
+  background-color: var(--brand-purple);
+  width: 100%;
+}
+
+.banner-yellow {
+  height: 6px;
+  background-color: var(--brand-yellow);
+  width: 100%;
+}
+
+/* Custom Scrollbar for Sidebar */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: var(--bg-sidebar);
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--border-sidebar);
+  border-radius: 3px;
+}
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--border-focus);
+}
+
+/* Print CSS Styles */
+@media print {
+  /* Hide UI elements */
+  .sidebar,
+  .sidebar-actions {
+    display: none !important;
+  }
+
+  html, body {
+    background-color: #ffffff !important;
+    overflow: visible !important;
+    height: auto !important;
+    width: auto !important;
+  }
+
+  .canvas {
+    display: block !important;
+    padding: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: transparent !important;
+  }
+
+  .app-container {
+    display: block !important;
+  }
+
+  /* Make receipt card take full printable area */
+  .receipt-wrapper {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    height: 100vh !important;
+    box-shadow: none !important;
+    padding: 28px 40px 45px 40px !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    position: relative !important;
+  }
+
+  /* Remove dashed underlines in printable portion as requested */
+  .info-value {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Force ALL background colors and images to print — critical for yellow/purple banners */
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Explicitly re-declare the colored elements so they survive print stripping */
+  .diagonal-purple {
+    background-color: #3A025B !important;
+  }
+  .diagonal-yellow {
+    background-color: #f4be1a !important;
+  }
+  .banner-purple {
+    background-color: #3A025B !important;
+  }
+  .banner-yellow {
+    background-color: #f4be1a !important;
+  }
+  .receipt-meta-box .meta-label {
+    background-color: #3A025B !important;
+    color: #ffffff !important;
+  }
+  .financial-table th {
+    background-color: #ffffff !important;
+  }
+  .financial-table .total-row td {
+    background-color: #ffffff !important;
+  }
+  .payment-summary-box {
+    background-color: #ede5f5 !important;
+  }
+}

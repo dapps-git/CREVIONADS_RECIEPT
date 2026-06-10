@@ -1,0 +1,11 @@
+Yes, I understand.
+
+You want a Quotation Maker where:
+
+1. Some details are fixed/static (institution name, logo, address, GST number, footer, etc.).
+2. Some details are entered through a form (customer name, items, quantity, price, discount, etc.).
+3. As the user fills the form, a quotation preview is shown on the right side.
+4. The user can click Generate PDF.
+5. The generated PDF should look exactly like the quotation template
+Here you have to create a invoice quotation maker app, quotation maker web PDF printer. This is basically same as the invoice.png. I added a reference pic and also I added logo.png. You have to add that logo. And you have to add the locations and all. And I think you can make it better than the invoice.png. Like in a more, like a good font styles and font and everything. You can make it pretty. And here, we should make sure that the student name, course, phone number, payment, for this should be static one. And you can see the underline. So there it shouldn't be underlined in the printed portion. It should be like a formal one, okay, standard one. And you can see payment method. So if the payment method is cash, you can remove the below section transaction ID. In case if the payment method is UPI or bank transfer or card, you have to add kind of a transaction ID. If the bank transfer, if the, yeah, you can just simply add one, okay, and received by. So basically, you have to make it a better version, okay? You can see receipt number, so it should like you start from 0001. You have to start like a SL number. And date should be in like a month, date, year format. You have to maintain and keep that one. And overall, you have to choose the same theme, color theme, okay? Don't forget. You should make sure that you have to choose the same color theme, like a yellow violet theme. So let me know if you have any doubts. Please do the same and make it more better than the invoice.png image.
+And also this is for like in the left side we can add the datas and in the right side we should know how it will look like and there should be a generate PDF option should be there and also print option. So print option should be also there. It should be color print, okay.
