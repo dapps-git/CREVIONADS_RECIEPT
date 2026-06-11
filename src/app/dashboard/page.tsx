@@ -18,8 +18,7 @@ interface ReceiptData {
     transactionId: string;
     receivedBy: string;
     courseFee: string;
-    registrationFee: string;
-    otherCharges: string;
+    totalAmountPaid: string;
 }
 
 const TODAY = new Date().toLocaleDateString("en-US", {
@@ -39,8 +38,7 @@ const DEFAULT_DATA: ReceiptData = {
     transactionId: "",
     receivedBy: "",
     courseFee: "",
-    registrationFee: "",
-    otherCharges: "",
+    totalAmountPaid: "",
 };
 
 const formatCurrency = (val: string) => {
@@ -49,10 +47,14 @@ const formatCurrency = (val: string) => {
     return `₹${num.toFixed(2)}`;
 };
 
-const sumTotal = (a: string, b: string, c: string) => {
-    const total = (parseFloat(a) || 0) + (parseFloat(b) || 0) + (parseFloat(c) || 0);
-    return total === 0 ? "—" : `₹${total.toFixed(2)}`;
+const calculateBalance = (courseFee: string, totalPaid: string) => {
+    if (!courseFee) return "";
+    const fee = parseFloat(courseFee) || 0;
+    const paid = parseFloat(totalPaid) || 0;
+    return (fee - paid).toString();
 };
+
+
 
 // ── SVG Icons ──────────────────────────────────────────────────
 const PersonIcon = () => (
@@ -278,31 +280,31 @@ export default function ReceiptMaker() {
                                     id="course-fee"
                                     type="number"
                                     min="0"
-                                    value={data.courseFee}
+                                    value={data.courseFee || ""}
                                     onChange={(e) => update("courseFee", e.target.value)}
                                     placeholder="0.00"
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="reg-fee">Registration Fee (₹)</label>
+                                <label htmlFor="total-amount-paid">Total Amount Paid (₹)</label>
                                 <input
-                                    id="reg-fee"
+                                    id="total-amount-paid"
                                     type="number"
                                     min="0"
-                                    value={data.registrationFee}
-                                    onChange={(e) => update("registrationFee", e.target.value)}
+                                    value={data.totalAmountPaid || ""}
+                                    onChange={(e) => update("totalAmountPaid", e.target.value)}
                                     placeholder="0.00"
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="other-fee">Other Charges (₹)</label>
+                                <label htmlFor="balance-amount">Balance Amount</label>
                                 <input
-                                    id="other-fee"
-                                    type="number"
-                                    min="0"
-                                    value={data.otherCharges}
-                                    onChange={(e) => update("otherCharges", e.target.value)}
-                                    placeholder="0.00"
+                                    id="balance-amount"
+                                    type="text"
+                                    value={formatCurrency(calculateBalance(data.courseFee || "", data.totalAmountPaid || ""))}
+                                    readOnly
+                                    disabled
+                                    style={{ opacity: 0.7, cursor: "not-allowed" }}
                                 />
                             </div>
                         </div>
@@ -467,17 +469,13 @@ export default function ReceiptMaker() {
                                             <td>Course Fee</td>
                                             <td>{formatCurrency(data.courseFee)}</td>
                                         </tr>
-                                        <tr>
-                                            <td>Registration Fee</td>
-                                            <td>{formatCurrency(data.registrationFee)}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Other Charges</td>
-                                            <td>{formatCurrency(data.otherCharges)}</td>
-                                        </tr>
                                         <tr className="total-row">
                                             <td>Total Amount Paid</td>
-                                            <td>{sumTotal(data.courseFee, data.registrationFee, data.otherCharges)}</td>
+                                            <td>{formatCurrency(data.totalAmountPaid)}</td>
+                                        </tr>
+                                        <tr className="balance-row">
+                                            <td>Balance Amount</td>
+                                            <td>{formatCurrency(calculateBalance(data.courseFee, data.totalAmountPaid))}</td>
                                         </tr>
                                     </tbody>
                                 </table>
